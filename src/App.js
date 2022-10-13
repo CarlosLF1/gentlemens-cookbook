@@ -13,10 +13,23 @@ const App = () => {
   const [testEntries, setTestEntries] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      await client.getEntries()
-        .then((response) => setTestEntries(response.items)).then(console.log(testEntries))
+      // await client.getEntries({
+      //   content_type: 'recipe',
+      // })
+      //   .then((response) => console.log(response.items))
+      //   .catch(console.error);
+      await client.getEntries({
+        content_type: 'recipe',
+        select: 'fields',
+        'metadata.tags.sys.id[all]': 'categoryVegan',
+      })
+        .then((response) => console.log(response.items))
         .catch(console.error);
+      // await client.getEntry('7ipsLOLMKdPJEpxGD0M8rJ')
+      //   .then((entry) => console.log(entry))
+      //   .catch(console.error);
     };
+
     fetchData();
   }, []);
   return (
