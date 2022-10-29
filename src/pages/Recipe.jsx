@@ -22,7 +22,7 @@ function Recipe() {
   return <DetailWrapper>
           <div>
             <h2>{details.title}</h2>
-            <img src={details.image} alt="image" />
+            <img src={details.image} alt="" />
           </div>
           <Info>
       <Button className={activeTab === 'instructions' ? 'active' : ''}
