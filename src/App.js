@@ -8,9 +8,9 @@ import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="App">
+    <div className="m-5 p-5">
         <Nav>
-          <div>
+          <div className="flex space-x-2">
             <GiKnifeFork />
             <Logo to={"/"}>The Gentlemens Cookbook</Logo>
             </div>
@@ -27,7 +27,7 @@ const Logo = styled(Link)`
 text-decoration: none;
 font-size: 1.5rem;
 font-weight: 400;
-font-family: 'Lobester Two', cursive;
+font-family: 'Lobster Two', cursive;
 `
 
 const Nav = styled.div`
