@@ -5,8 +5,12 @@ import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Cuisine from './pages/Cuisine';
 import Searched from './pages/Searched';
+
+import RecipeDetail from './components/RecipeDetail';
+
 import Recipe from './pages/Recipe';
 import NavBar from './components/NavBar';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +21,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/cuisine/:type" element={<Cuisine />} />
       <Route path="/searched/:search" element={<Searched />} />
-      <Route path="/recipe/:name" element={<Recipe />} />
+      <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
     </Routes>
   </BrowserRouter>
   
