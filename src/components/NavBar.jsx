@@ -10,9 +10,9 @@ function NavBar() {
   return (
     <>
     <Nav>
-          <div className="flex space-x-2">
+          <div className="flex space-x-3">
             <GiKnifeFork />
-            <Logo to={"/"}>The Gentlemens Cookbook</Logo>
+            <Logo to={"/"}>The Gentlemen's Cookbook</Logo>
             </div>
           <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
       </Nav>
@@ -27,6 +27,9 @@ text-decoration: none;
 font-size: 1.5rem;
 font-weight: 400;
 font-family: 'Lobster Two', cursive;
+ &:hover {
+        color: #e94057;
+        font-weight: 500;
 `
 
 const Nav = styled.div`
@@ -34,6 +37,8 @@ padding: 4rem 0rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
+margin-left: 3rem;
+margin-right: 3rem;
 svg {
   font-size: 2rem;
 }
