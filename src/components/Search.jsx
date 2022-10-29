@@ -17,10 +17,11 @@ function Search() {
       <FormStyle onSubmit={submitHandler}>
           <div>
               <FaSearch></FaSearch>
-              <input
+              <StyledInput
                   onChange={(e) => setInput(e.target.value)}
                   type="text"
                   value={input}
+                  autoFocus={true}
               />
             </div>
     </FormStyle>
@@ -35,7 +36,7 @@ const FormStyle = styled.form`
         position: relative;
     }
 
-    input {
+    /* input {
         border: none;
         background: linear-gradient(35deg, #716f6f, #313131);
         font-size: 1.5rem;
@@ -45,6 +46,10 @@ const FormStyle = styled.form`
         border-radius: 1rem;
         outline: none;
         width: 100%;
+        &:focus {
+            outline-color: orange;
+            border-style: solid;
+        } */
     }
     svg {
         position: absolute;
@@ -54,4 +59,21 @@ const FormStyle = styled.form`
         color: white;
     }
 `
+
+const StyledInput = styled.input`
+    border: none;
+    background: linear-gradient(35deg, #716f6f, #313131);
+    font-size: 1.5rem;
+    color: white;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+    width: 100%;
+    &:focus {
+        outline: none;
+        box-shadow: 0px 0px 2px orange;
+    }
+`;
+
 export default Search
