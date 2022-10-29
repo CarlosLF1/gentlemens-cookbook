@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import Recipe from './components/Recipe';
 
 const contentful = require('contentful');
 
@@ -9,34 +10,40 @@ const client = contentful.createClient({
   accessToken: 'XK9hAS_c-tQHK5UcRKKF-wUZhCUz8nE9ExQ5-9MD5qA',
 });
 
+
 const App = () => {
-  const [testEntries, setTestEntries] = useState(null);
+  
+  const [recipes, setRecipes] = useState() 
+  
+
   useEffect(() => {
     const fetchData = async () => {
-      // await client.getEntries({
-      //   content_type: 'recipe',
-      // })
-      //   .then((response) => console.log(response.items))
-      //   .catch(console.error);
       await client.getEntries({
         content_type: 'recipe',
-        select: 'fields',
-        'metadata.tags.sys.id[all]': 'categoryVegan',
+
       })
-        .then((response) => console.log(response.items))
+        .then((response) => {
+          console.log(response.items)
+          setRecipes(response?.items)
+        })
         .catch(console.error);
-      // await client.getEntry('7ipsLOLMKdPJEpxGD0M8rJ')
-      //   .then((entry) => console.log(entry))
-      //   .catch(console.error);
     };
 
     fetchData();
   }, []);
+
+  function handleClick(id){
+    console.log(id)
+  }
+
   return (
     <div className="App">
       <h1 className="text-3xl font-bold underline">
         Hello Gentlemen! Shall we cook?
       </h1>
+      <ul>
+        {recipes?.map((item, idx)=> <Recipe key={item.sys.id} cb={handleClick} recipe={item}/>)}
+      </ul>
     </div>
   );
 };
