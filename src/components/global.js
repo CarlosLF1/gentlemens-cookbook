@@ -42,16 +42,23 @@ async function handleRecipe (content, method) {
             console.log (result)
             return result
         case "list":
-            console.log ("getting list from contentful",content, client)
-            client.getEntries({
-                content_type: content.cat,
-                order: content.order,
-                limit:content.limit
-                })
-              .then((response) => result= response.items)
-              .catch(console.error)
+            console.log ("getting list from contentful and client ",content, client)
+            
+            const entryquery = {};
+            const tags= 'metadata.tags.sys.id[in]';
+            const query = 'query'
+            if (content.type) entryquery['content_type'] = content.type;
+            if (content.order) entryquery['order'] = content.order;
+            if (content.limit) entryquery['limit'] = content.limit;
+            if (content.tags) entryquery[tags] = content.tags;
+            if (content.query) entryquery[query] = content.query;
 
-            return result
+            result = await client.getEntries(entryquery)
+
+            console.log('vegan list', result)
+
+            return result.items
+
         case "delete":
             client.getEntry(content.json.id)
             .then((entry) => entry.delete())
