@@ -8,7 +8,7 @@ return (
 
   <ul> 
       {
-        recipe?.fields?.ingredients.map((item, idx)=><li key={idx}>{item?.Name} - {item?.MeasurementAmount} - {item?.MeasurementType}</li>)
+        recipe?.fields?.ingredients?.map((item, idx)=><li key={idx}>{item?.Name} - {item?.MeasurementAmount} - {item?.MeasurementType}</li>)
       }
   </ul>
 

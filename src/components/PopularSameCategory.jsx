@@ -12,7 +12,7 @@ const PopularSameCategory = ({category}) => {
 
   useEffect(() => {
     getPopular();
-  },);
+  },[]);
 
   async function getPopular() {
 
