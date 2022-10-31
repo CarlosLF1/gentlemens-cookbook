@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { Link } from 'react-router-dom';
 import { handleRecipe } from "./global";
-import { Wrapper, Card, Gradient } from "./styles";
+import { Wrapper} from "./styles";
+import Cards from "./Cards"
 
 const PopularSameCategory = ({category}) => {
   const [popular, setPopular] = useState([]);
@@ -12,7 +12,7 @@ const PopularSameCategory = ({category}) => {
 
   useEffect(() => {
     getPopular();
-  },[]);
+  },[category]);
 
   async function getPopular() {
 
@@ -34,7 +34,9 @@ const PopularSameCategory = ({category}) => {
 
     const myrcp = await handleRecipe(content, "list");
     console.log("recipe related popular list", myrcp);
+    
     setPopular(myrcp);
+    
 
   }
 
@@ -55,15 +57,9 @@ const PopularSameCategory = ({category}) => {
               gap: "5rem",
             }}>
               {popular.map((recipe) => {
-                return (
+                  return (
                   <SplideSlide key={recipe.sys.id}>
-                    <Card>
-                      <Link to={"/recipe/" + recipe.sys.id}>
-                        <p>{recipe.fields.title}</p>
-                        <img src={recipe?.fields?.photos[0]?.fields.file.url} alt={recipe.title} />
-                        <Gradient />
-                      </Link>
-                    </Card>
+                     <Cards recipe={recipe} />
                   </SplideSlide>
                 );
               })}

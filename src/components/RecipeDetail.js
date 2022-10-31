@@ -1,10 +1,8 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import { useParams } from 'react-router-dom'
 
-import RecipeCard from "./Recipe/RecipeCard"
-import RecipeImages from "./Recipe/RecipeImages"
 import RecipeVideo from "./Recipe/RecipeVideo"
 import Ingredients from './Recipe/Ingredients'
 import UserComment from "./Recipe/UserComment"
@@ -21,11 +19,13 @@ import {handleRecipe} from "./global"
 export  default function RecipeDetail() {
 
   const [content, setContent] = useState()
+  const inputElement = useRef();
   
   let { recipeId } = useParams()
 
   useEffect(()=>{
-
+    inputElement?.current?.focus();
+    console.log(inputElement)
     const fetchData = async () => {
       const myrcp =  await handleRecipe(recipeId,"get")
       console.log("recipe", myrcp)
@@ -39,7 +39,7 @@ export  default function RecipeDetail() {
     <div>
       {content
       ?<div className="entry">
-        <Card>
+        <Card ref={inputElement}>
             <img src={content?.fields?.photos[0]?.fields.file.url} alt={content.title} />
             <Gradient />
         </Card>
@@ -63,7 +63,6 @@ export  default function RecipeDetail() {
 
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
           <UserStar recipe={content} />
-          <UserComment recipe={content} all={false}/>
         </Card>
 
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
