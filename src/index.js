@@ -8,7 +8,6 @@ import Searched from './pages/Searched';
 
 import RecipeDetail from './components/RecipeDetail';
 
-import Recipe from './pages/Recipe';
 import NavBar from './components/NavBar';
 
 

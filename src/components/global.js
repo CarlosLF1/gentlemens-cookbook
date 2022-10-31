@@ -1,36 +1,57 @@
 const contentful = require('contentful');
+const contentfulmng = require('contentful-management')
 const user="1111"
 const client = contentful.createClient({
-    space: 'fx3pnargdzjr',
-    environment: 'master', // defaults to 'master' if not set
-    accessToken: 'XK9hAS_c-tQHK5UcRKKF-wUZhCUz8nE9ExQ5-9MD5qA',
+    space: process.env.REACT_APP_SPACE,
+    environment: process.env.REACT_APP_ENVIRONMENT, // defaults to 'master' if not set
+    accessToken: process.env.REACT_APP_ACCESS_TOKEN,
   });
 
+const clientmng = contentfulmng.createClient({
+    accessToken: process.env.REACT_APP_MANAGEMENT_ACCESS_TOKEN,
+  });
+
+console.log(process.env.REACT_APP_ENVIRONMENT)
 async function handleRecipe (content, method) {
 
     let result
     switch (method) {
 
         case "add": 
-            client.createEntry(content.typeId, content.json)
-            .then((entry) => result=entry)
-            .catch(console.error)
-        
-            console.log (result)
+ 
             return result
 
         case "update": 
-            client.getEntry(content.json.id)
+            console.log("update content comments length", content, content.comments.length)
+            await clientmng.getSpace('fx3pnargdzjr')
+            .then((space) => space.getEnvironment('master'))
+            .then((environment) => environment.getEntry(content.id))
             .then((entry) => {
-            entry.fields.title['en-US'] = content.json.title
-            
-            
-            return entry.update()
+                console.log ("entry before",entry) 
+                if (content.title) entry.fields.title = content.title
+                if (content.ingredients) entry.fields.ingredients = content.ingredients
+                if (content.comments.length>0) {
+                    if (entry?.fields?.comments?.length>0) {
+                        entry.fields.comments= [...entry.fields.comments, content.comments].toString
+                    } else entry.fields.comments=[content.comments].toString
+                }   
+                if (content.dateModified) entry.fields.dateModified = content.dateModified
+                if (content.avarageOfRatings) entry.fields.avarageOfRatings = content.avarageOfRatings
+                if (content.mealThumb) entry.fields.mealThumb = content.mealThumb
+                if (content.numberofratings) entry.fields.numberofratings = content.numberofratings
+                if (content.recipeInstructions) entry.fields.recipeInstructions = content.recipeInstructions
+                
+                console.log ("entry after",entry) 
+                
+                return entry.update()
             })
-            .then((entry) => result = `Entry ${entry.sys.id} updated.`)
+            .then((entry) => entry.publish())
+            .then((entry) => {
+                console.log(`Entry ${entry.sys.id} published.`)
+                result=entry
+            })
             .catch(console.error)
 
-            console.log (result)
             return result
 
         case "get":

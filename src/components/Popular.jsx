@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { Link } from 'react-router-dom';
+
 import { handleRecipe } from "./global";
-import { Wrapper, Card, Gradient } from "./styles";
+import { Wrapper} from "./styles";
+import Cards from "./Cards";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);
@@ -17,7 +18,7 @@ const Popular = () => {
     
     const content ={
       type:'recipe',
-      order:'-fields.numberofratings',
+      order:'-fields.avarageOfRatings',
       limit:10
      }
     const myrcp =  await handleRecipe(content,"list")
@@ -40,15 +41,10 @@ const Popular = () => {
             gap: "5rem",
           }}>
             {popular.map((recipe) => {
+              const mystar = {size: 30, value: recipe.fields.avarageOfRatings, edit: false }
               return (
                 <SplideSlide key={recipe.sys.id}>
-                  <Card>
-                    <Link to={"/recipe/" + recipe.sys.id}>
-                      <p>{recipe.fields.title + '\n Created At:'+ recipe.sys.createdAt.substring(0,10)}</p>
-                      <img src={recipe?.fields?.photos[0]?.fields.file.url} alt={recipe.title} />
-                      <Gradient />
-                    </Link>
-                  </Card>
+                  <Cards recipe={recipe} />
                 </SplideSlide>
               );
             })}
