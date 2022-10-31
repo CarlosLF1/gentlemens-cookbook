@@ -19,8 +19,6 @@ const Veggie = () => {
 
 
   const getVeggie = async () => {
-    
-      
       console.log("recipe List for Vegi")
       const content ={
         type:'recipe',

@@ -1,6 +1,5 @@
 const contentful = require('contentful');
 const contentfulmng = require('contentful-management')
-const user="1111"
 const client = contentful.createClient({
     space: process.env.REACT_APP_SPACE,
     environment: process.env.REACT_APP_ENVIRONMENT, // defaults to 'master' if not set
@@ -67,26 +66,21 @@ async function handleRecipe (content, method) {
             
             const entryquery = {};
             const tags= 'metadata.tags.sys.id[in]';
-            const query = 'query'
+            const query = 'query' 
             if (content.type) entryquery['content_type'] = content.type;
             if (content.order) entryquery['order'] = content.order;
             if (content.limit) entryquery['limit'] = content.limit;
             if (content.tags) entryquery[tags] = content.tags;
-            if (content.query) entryquery[query] = content.query;
+            if (content.query) entryquery["query"] = content.query;
 
             result = await client.getEntries(entryquery)
 
-            console.log('vegan list', result)
+            console.log('list for:', result, entryquery)
 
             return result.items
-
+        //not implemented yet
         case "delete":
-            client.getEntry(content.json.id)
-            .then((entry) => entry.delete())
-            .then(() => result = "entry deleted")
-            .catch(console.error)
-
-            console.log (result)
+            
             return result
             
         default:
@@ -96,4 +90,4 @@ async function handleRecipe (content, method) {
 }
 
 
-export {contentful, client, handleRecipe,user}
+export {contentful, client, handleRecipe}
