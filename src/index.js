@@ -7,6 +7,7 @@ import Cuisine from './pages/Cuisine';
 import Searched from './pages/Searched';
 import Recipe from './pages/Recipe';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
       <Route path="/searched/:search" element={<Searched />} />
       <Route path="/recipe/:name" element={<Recipe />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
   
 );

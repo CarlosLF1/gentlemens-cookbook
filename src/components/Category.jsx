@@ -40,7 +40,7 @@ const SLink = styled(NavLink)`
     border-radius: 50%;
     margin-right: 2rem;
     text-decoration: none;
-    background: linear-gradient(35deg, #6b6a6a, #313131);
+    background: linear-gradient(35deg, #055d8d, #003049);
     width: 6rem;
     height: 6rem;
     cursor: pointer;
@@ -64,6 +64,10 @@ const SLink = styled(NavLink)`
         h4 {
             color: white;
         }
+    }
+    &:hover {
+      padding: 2rem;
+      background: #669BBC;
     }
 `;
 

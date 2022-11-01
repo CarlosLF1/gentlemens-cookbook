@@ -28,8 +28,9 @@ font-size: 1.5rem;
 font-weight: 400;
 font-family: 'Lobster Two', cursive;
  &:hover {
-        color: #e94057;
+        color: #C1121F;
         font-weight: 500;
+ }
 `
 
 const Nav = styled.div`
@@ -45,7 +46,7 @@ svg {
 `
 
 const Button = styled.button`
-    background: linear-gradient(35deg, #6b6a6a, #313131);
+    background: linear-gradient(35deg, #035784, #003049);
     color: white;
     display: flex;
     justify-content: flex-end;

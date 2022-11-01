@@ -35,34 +35,20 @@ const FormStyle = styled.form`
         width: 100%;
         position: relative;
     }
-
-    /* input {
-        border: none;
-        background: linear-gradient(35deg, #716f6f, #313131);
-        font-size: 1.5rem;
-        color: white;
-        padding: 1rem 3rem;
-        border: none;
-        border-radius: 1rem;
-        outline: none;
-        width: 100%;
-        &:focus {
-            outline-color: orange;
-            border-style: solid;
-        } */
-    }
     svg {
         position: absolute;
         top: 50%;
         left: 0%;
         transform: translate(100%, -50%);
         color: white;
+        height: 1.5rem;
+        width: 1.5rem;
     }
 `
 
 const StyledInput = styled.input`
     border: none;
-    background: linear-gradient(35deg, #716f6f, #313131);
+    background: linear-gradient(35deg, #046294, #003049);
     font-size: 1.5rem;
     color: white;
     padding: 1rem 3rem;
