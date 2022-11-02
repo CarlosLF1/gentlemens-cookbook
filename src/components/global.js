@@ -11,6 +11,7 @@ const clientmng = contentfulmng.createClient({
   });
 
 console.log(process.env.REACT_APP_ENVIRONMENT)
+
 async function handleRecipe (content, method) {
 
     let result
@@ -25,15 +26,17 @@ async function handleRecipe (content, method) {
             await clientmng.getSpace('fx3pnargdzjr')
             .then((space) => space.getEnvironment('master'))
             .then((environment) => environment.getEntry(content.id))
-            .then((entry) => {
+            .then(async (entry) => {
                 console.log ("entry before",entry) 
-                if (content.title) entry.fields.title = content.title
+/*                 if (content.title) entry.fields.title = content.title
                 if (content.ingredients) entry.fields.ingredients = content.ingredients
-                if (content.comments.length>0) {
-                    if (entry?.fields?.comments?.length>0) {
-                        entry.fields.comments= [...entry.fields.comments, content.comments].toString
-                    } else entry.fields.comments=[content.comments].toString
+                if (content.comments) {
+                    if (entry?.fields?.comments?.["en-US"]?.length>0) {
+                        entry.fields.comments['en-US']=[...entry?.fields?.comments?.["en-US"], content.comments]
+                    } else entry.fields.comments=JSON.stringify([content.comments])
                 }   
+                
+               
                 if (content.dateModified) entry.fields.dateModified = content.dateModified
                 if (content.avarageOfRatings) entry.fields.avarageOfRatings = content.avarageOfRatings
                 if (content.mealThumb) entry.fields.mealThumb = content.mealThumb
@@ -41,15 +44,23 @@ async function handleRecipe (content, method) {
                 if (content.recipeInstructions) entry.fields.recipeInstructions = content.recipeInstructions
                 
                 console.log ("entry after",entry) 
-                
-                return entry.update()
-            })
-            .then((entry) => entry.publish())
-            .then((entry) => {
-                console.log(`Entry ${entry.sys.id} published.`)
+                entry.update() */
+
+
+                await entry.patch([
+                    {
+                      op: 'add',
+                      path: '/fields/comments/en-US',
+                      value: [content.comments,...entry?.fields?.comments?.["en-US"]]
+                    }])
+
                 result=entry
             })
-            .catch(console.error)
+
+            await clientmng.getSpace('fx3pnargdzjr')
+            .then((space) => space.getEnvironment('master'))
+            .then((environment) => environment.getEntry(content.id))
+            .then(async (entry) => await entry.publish())
 
             return result
 
@@ -66,7 +77,6 @@ async function handleRecipe (content, method) {
             
             const entryquery = {};
             const tags= 'metadata.tags.sys.id[in]';
-            const query = 'query' 
             if (content.type) entryquery['content_type'] = content.type;
             if (content.order) entryquery['order'] = content.order;
             if (content.limit) entryquery['limit'] = content.limit;

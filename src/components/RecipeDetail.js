@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import RecipeVideo from "./Recipe/RecipeVideo"
 import Ingredients from './Recipe/Ingredients'
 import UserComment from "./Recipe/UserComment"
-import UserStar from "./Recipe/UserStar"
+import UserStar from "./UserStar"
 import PopularSameCategory from "./PopularSameCategory"
 import { Card, Gradient } from "./styles";
 
@@ -34,7 +34,12 @@ export  default function RecipeDetail() {
     fetchData();
   },[recipeId])
 
-   
+  function updateComments(recipe){
+    const myrcp={...content}
+    myrcp.fields.comments.push(recipe)
+    setContent(myrcp)
+  }
+
   return (
     <div>
       {content
@@ -62,7 +67,7 @@ export  default function RecipeDetail() {
         <p>{content?.fields?.howToCook}</p>
 
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
-          <UserStar recipe={content} />
+          <UserStar recipe={content} cb={updateComments}/>
         </Card>
 
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>

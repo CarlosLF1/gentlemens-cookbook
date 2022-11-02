@@ -1,12 +1,12 @@
 import React from 'react'
 
 export default function UserComment({recipe}) {
-  console.log("commets", recipe)
+  console.log("comments", recipe)
   return (
-      <ul> 
+      <ol reversed> 
       {
-        recipe?.fields?.comments.map((item, idx)=><li key={idx}>{item?.comment} - {item?.user} - {item?.date.substring(0,10)}</li>)
+        recipe?.fields?.comments?.map((item, idx)=><li key={idx}> {item?.date} - {item?.user} -{item?.comment}</li>)
       }
-  </ul>
+  </ol>
   )
 }
