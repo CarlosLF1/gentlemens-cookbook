@@ -6,13 +6,11 @@ import { useParams } from 'react-router-dom'
 import RecipeVideo from "./Recipe/RecipeVideo"
 import Ingredients from './Recipe/Ingredients'
 import UserComment from "./Recipe/UserComment"
-import UserStar from "./UserStar"
+import StarComment from "./StarComment"
 import PopularSameCategory from "./PopularSameCategory"
 import { Card, Gradient } from "./styles";
-
-
-
 import {handleRecipe} from "./global"
+
 
 
 
@@ -67,9 +65,9 @@ export  default function RecipeDetail() {
         <p>{content?.fields?.howToCook}</p>
 
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
-          <UserStar recipe={content} cb={updateComments}/>
+            <StarComment recipe={content} all={true} cb={updateComments} />
         </Card>
-
+          
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
           <UserComment recipe={content} all={true}/>
         </Card>
