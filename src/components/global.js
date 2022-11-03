@@ -1,3 +1,4 @@
+
 const contentful = require('contentful');
 const contentfulmng = require('contentful-management')
 const client = contentful.createClient({
@@ -27,33 +28,65 @@ async function handleRecipe (content, method) {
             .then((space) => space.getEnvironment('master'))
             .then((environment) => environment.getEntry(content.id))
             .then(async (entry) => {
-                console.log ("entry before",entry) 
-/*                 if (content.title) entry.fields.title = content.title
-                if (content.ingredients) entry.fields.ingredients = content.ingredients
-                if (content.comments) {
-                    if (entry?.fields?.comments?.["en-US"]?.length>0) {
-                        entry.fields.comments['en-US']=[...entry?.fields?.comments?.["en-US"], content.comments]
-                    } else entry.fields.comments=JSON.stringify([content.comments])
-                }   
+
+                console.log ("entry before",entry)
                 
-               
-                if (content.dateModified) entry.fields.dateModified = content.dateModified
-                if (content.avarageOfRatings) entry.fields.avarageOfRatings = content.avarageOfRatings
-                if (content.mealThumb) entry.fields.mealThumb = content.mealThumb
-                if (content.numberofratings) entry.fields.numberofratings = content.numberofratings
-                if (content.recipeInstructions) entry.fields.recipeInstructions = content.recipeInstructions
+                const patch =[]
+
+              if (content.title) patch.push({
+                op: 'add',
+                path: '/fields/title/en-US',
+                value: content.title
+              })
+
+              if (content.ingredients) patch.push({
+                op: 'add',
+                path: '/fields/ingredients/en-US',
+                value: [content.ingredients, ...entry?.fields?.ingredients?.["en-US"]]
+              })
+              
+   /*            patch.push({
+                op: 'add',
+                path: '/fields/datemodified/en-US',
+                value: (new Date()).toISOString()
+              })  */          
+              
+              if (content.star) {
                 
-                console.log ("entry after",entry) 
-                entry.update() */
+                const currentStarAvr = entry?.fields?.avarageOfRatings?.["en-US"]||0
+                const currentStarNmbr = entry?.fields?.numberofratings?.["en-US"]||0
+                console.log("star info:",currentStarAvr, currentStarNmbr, entry)  
+                patch.push({
+                op: 'add',
+                path: '/fields/numberofratings',
+                value: currentStarNmbr+1
+                })
+                
+                patch.push({
+                    op: 'add',
+                    path: '/fields/avarageOfRatings',
+                    value: (content.star+(currentStarNmbr*currentStarAvr))/(currentStarNmbr+1)
+                    })
+                
+              }             
 
-
-                await entry.patch([
-                    {
-                      op: 'add',
-                      path: '/fields/comments/en-US',
-                      value: [content.comments,...entry?.fields?.comments?.["en-US"]]
-                    }])
-
+                if (content.recipeInstructions) patch.push({
+                    op: 'add',
+                    path: '/fields/recipeInstructions/en-US',
+                    value: content.recipeInstructions
+                  })
+                
+                if (content.comments) patch.push({
+                    op: 'add',
+                    path: '/fields/comments/en-US',
+                    value: [content.comments, ...entry?.fields?.comments?.["en-US"]]
+                  })
+                
+                
+                console.log (patch)
+                
+                if (patch.length>0)  entry.patch (patch)
+            
                 result=entry
             })
 
