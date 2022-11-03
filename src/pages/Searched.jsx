@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { handleRecipe } from '../components/global';
+import Cards from "../components/Cards";
 
 function Searched() {
 
@@ -10,9 +12,16 @@ function Searched() {
     let params = useParams();
 
     const getSearched = async (name) => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}`)
-        const recipes = await data.json();
-        setSearchedRecipes(recipes.results);
+        console.log("recipe List for fulltext")
+        const content ={
+          type:'recipe',
+          query:name,
+          order:'-sys.createdAt'
+         }
+        const myrcp =  await handleRecipe(content,"list")
+        console.log("recipe List for category2", myrcp)
+        setSearchedRecipes(myrcp)
+   
     };
 
     useEffect(() => {
@@ -22,12 +31,7 @@ function Searched() {
     return <Grid>
         {searchedRecipes.map((item) => {
             return (
-                <Card key={item.id}>
-                    <Link to={'/recipe/' + item.id}>
-                        <img src={item.image} alt="" />
-                        <h4>{item.title}</h4>
-                    </Link>
-                </Card>
+                <Cards recipe={item} />
             )
         })}
     </Grid>;
