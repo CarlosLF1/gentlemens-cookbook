@@ -3,8 +3,9 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 
 import { handleRecipe } from "./global";
-import { Wrapper} from "./styles";
+//import { Wrapper} from "./styles";
 import Cards from "./Cards";
+import styled from "styled-components";
 
 const Popular = () => {
   const [popular, setPopular] = useState([]);

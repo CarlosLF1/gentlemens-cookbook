@@ -31,7 +31,7 @@ function Searched() {
     return <Grid>
         {searchedRecipes.map((item) => {
             return (
-                <Cards recipe={item} />
+                <Cards key= {item.sys.id} recipe={item} />
             )
         })}
     </Grid>;
