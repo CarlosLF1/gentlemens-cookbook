@@ -9,6 +9,7 @@ import Searched from './pages/Searched';
 import RecipeDetail from './components/RecipeDetail';
 
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 
 
@@ -22,6 +23,7 @@ root.render(
       <Route path="/searched/:search" element={<Searched />} />
       <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
     </Routes>
+    <Footer />
   </BrowserRouter>
   
 );

@@ -9,10 +9,10 @@ import Search from "./Search";
 function NavBar() {
   return (
     <>
-    <Nav>
-          <div className="flex space-x-2">
+    <Nav className=''>
+          <div className="flex space-x-3">
             <GiKnifeFork />
-            <Logo to={"/"}>The Gentlemens Cookbook</Logo>
+            <Logo to={"/"}>The Gentlemen's Cookbook</Logo>
             </div>
           <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
       </Nav>
@@ -24,9 +24,13 @@ function NavBar() {
 
 const Logo = styled(Link)`
 text-decoration: none;
-font-size: 1.5rem;
+font-size: 2rem;
 font-weight: 400;
 font-family: 'Lobster Two', cursive;
+ &:hover {
+        color: #C1121F;
+        font-weight: 500;
+ }
 `
 
 const Nav = styled.div`
@@ -34,13 +38,15 @@ padding: 4rem 0rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
+margin-left: 3rem;
+margin-right: 3rem;
 svg {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 `
 
 const Button = styled.button`
-    background: linear-gradient(35deg, #6b6a6a, #313131);
+    background: linear-gradient(35deg, #035784, #003049);
     color: white;
     display: flex;
     justify-content: flex-end;

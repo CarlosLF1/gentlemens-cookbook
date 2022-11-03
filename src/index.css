@@ -7,6 +7,7 @@
 @layer base {
   html {
     font-family: 'Montserrat', sans-serif;
+    background: #FDF0D5;
   }
 }
 
@@ -16,12 +17,18 @@ h4 {
 }
 
 h3 {
-  font-size: 1.5rem;
-  color: rgb(56, 56, 56);
+  font-size: 1.2rem;
+  color: #21638b;
   line-height: 2.5rem;
-  margin: 2rem 0rem;
+  margin: 1.5rem 0rem;
+  font-weight: 700;
+  margin-left: 1rem;
 }
 
 a {
   color: rgb(56, 56, 56);
+}
+
+#footer-logo {
+  font-family: 'Lobster Two', 'Montserrat';
 }
