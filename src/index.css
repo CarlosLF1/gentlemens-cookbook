@@ -28,3 +28,7 @@ h3 {
 a {
   color: rgb(56, 56, 56);
 }
+
+#footer-logo {
+  font-family: 'Lobster Two', 'Montserrat';
+}

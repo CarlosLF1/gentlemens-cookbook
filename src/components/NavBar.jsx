@@ -9,7 +9,7 @@ import Search from "./Search";
 function NavBar() {
   return (
     <>
-    <Nav>
+    <Nav className=''>
           <div className="flex space-x-3">
             <GiKnifeFork />
             <Logo to={"/"}>The Gentlemen's Cookbook</Logo>
@@ -24,7 +24,7 @@ function NavBar() {
 
 const Logo = styled(Link)`
 text-decoration: none;
-font-size: 1.5rem;
+font-size: 2rem;
 font-weight: 400;
 font-family: 'Lobster Two', cursive;
  &:hover {
@@ -41,7 +41,7 @@ align-items: center;
 margin-left: 3rem;
 margin-right: 3rem;
 svg {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 `
 
