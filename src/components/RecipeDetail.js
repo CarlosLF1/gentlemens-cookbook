@@ -39,7 +39,7 @@ export  default function RecipeDetail() {
   }
 
   return (
-    <div>
+    <div className='flex justify-center'>
       {content
       ?<div className="entry">
         <Card ref={inputElement}>
@@ -47,9 +47,9 @@ export  default function RecipeDetail() {
             <Gradient />
         </Card>
 
-        <div className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
-          <p className='flex flex-col '>{content.fields.title}</p>
-          <p className='flex flex-col'>{content.sys.createdAt.substring(0,10)}</p>
+        <div className='bg-[#c1121F] text-[#FDF0D5] backdrop-blur-lg rounded drop-shadow-lg'>
+          <p className='flex flex-col items-center font-bold '>{content.fields.title}</p>
+          <p className='flex flex-col items-center'> date added - {content.sys.createdAt.substring(0,10)}</p>
         </div>
       
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
