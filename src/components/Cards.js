@@ -15,7 +15,12 @@ export default function Cards({recipe}) {
             <p>{recipe.fields.title + '\n Created At:'+ recipe.sys.createdAt.substring(0,10)}</p>
             <ReactStars {...mystar}/>
             </div>
-            <img src={recipe?.fields?.photos[0]?.fields.file.url} alt={recipe.title} />
+            {
+              recipe?.fields?.photos[0]?.fields.file.url 
+              ? (
+                <img src={recipe?.fields?.photos[0]?.fields.file.url} alt={recipe.title} />
+              ) : undefined
+            }
             <Gradient />
         </Link>
       </Card>

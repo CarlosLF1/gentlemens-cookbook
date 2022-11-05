@@ -34,6 +34,7 @@ export default function StarComment ({recipe, cb}) {
     {
       setComment (element.comment)
       setStars (element.star)
+
     //  setCommented(true)
     }
   });
@@ -55,7 +56,7 @@ export default function StarComment ({recipe, cb}) {
     cb(content.comments)
   }
   
-  console.log("comented:", commented)
+  // console.log("comented:", commented)
 
   return (
     commented?<h5>You have allready added a comment</h5>
