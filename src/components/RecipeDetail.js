@@ -10,6 +10,7 @@ import StarComment from "./StarComment"
 import PopularSameCategory from "./PopularSameCategory"
 import { Card, Gradient } from "./styles";
 import {handleRecipe} from "./global"
+import Instructions from './Recipe/Instructions'
 
 
 
@@ -57,6 +58,7 @@ export  default function RecipeDetail() {
         </Card>
 
         <p>{content?.fields?.title}</p>
+        <Instructions recipe={content} />
         
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
           <Ingredients recipe={content} />
