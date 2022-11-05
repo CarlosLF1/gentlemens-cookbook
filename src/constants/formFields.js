@@ -64,4 +64,47 @@ const signupFields = [
   },
 ];
 
-export { loginFields, signupFields };
+const recipeFields = [
+  {
+    labelText: 'title',
+    labelFor: 'title',
+    id: 'title',
+    name: 'title',
+    type: 'text',
+    autoComplete: 'title',
+    isRequired: true,
+    placeholder: 'title',
+  },
+  {
+    labelText: 'ingredients',
+    labelFor: 'ingredients',
+    id: 'ingredients',
+    name: 'ingredients',
+    type: 'textarea',
+    autoComplete: 'ingredients',
+    isRequired: true,
+    placeholder: 'ingredients',
+  },
+  {
+    labelText: 'recipeInstructions',
+    labelFor: 'recipeInstructions',
+    id: 'recipeInstructions',
+    name: 'recipeInstructions',
+    type: 'textarea',
+    autoComplete: 'recipeInstructions',
+    isRequired: true,
+    placeholder: 'recipeInstructions',
+  },
+  {
+    labelText: 'userId',
+    labelFor: 'userId',
+    id: 'userId',
+    name: 'userId',
+    type: 'text',
+    autoComplete: 'userId',
+    isRequired: true,
+    placeholder: 'userId',
+  },
+]
+
+export { loginFields, signupFields, recipeFields };
