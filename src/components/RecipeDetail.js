@@ -40,23 +40,22 @@ export  default function RecipeDetail() {
   }
 
   return (
-    <div className='flex justify-center'>
+    <div className='flex flex-col justify-center items-center mx-20'>
       {content
-      ?<div className="entry">
-        <Card ref={inputElement}>
-            <img src={content?.fields?.photos[0]?.fields.file.url} alt={content.title} />
-            <Gradient />
-        </Card>
-
-        <div className='bg-[#c1121F] text-[#FDF0D5] backdrop-blur-lg rounded drop-shadow-lg'>
-          <p className='flex flex-col items-center font-bold '>{content.fields.title}</p>
-          <p className='flex flex-col items-center'> date added - {content.sys.createdAt.substring(0,10)}</p>
-        </div>
-      
-        <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
-          <RecipeVideo recipe={content} />
-        </Card>
-
+        ? <div className="entry">
+         <div className=' bg-[#c1121F] text-[#FDF0D5] backdrop-blur-lg rounded drop-shadow-lg'>
+            <h2 className='flex flex-col items-center font-bold rounded '>{content.fields.title}</h2>
+            <h5 className='flex flex-col items-center'> {content.sys.createdAt.substring(0, 10)} by {content.fields.userId}</h5>
+          </div>
+          <div className='grid grid-cols-2'>
+             <Card ref={inputElement}>
+               <img src={content?.fields?.photos[0]?.fields.file.url} alt={content.title} />
+               <Gradient />
+             </Card>
+             <Card className='bg-[#c1121F] bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
+               <RecipeVideo recipe={content} />
+             </Card>
+          </div>
         <p>{content?.fields?.title}</p>
         <Instructions recipe={content} />
         
