@@ -11,7 +11,7 @@ const Home = () => {
     //   transition={{ duration: 0.5 }}
     >
         <Veggie />
-        <Popular />
+      <Popular />
     </motion.div>
   )
 }

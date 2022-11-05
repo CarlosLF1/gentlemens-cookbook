@@ -1,54 +1,51 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { Link } from 'react-router-dom';
+
+import { handleRecipe } from "./global";
+//import { Wrapper} from "./styles";
+import styled from "styled-components";
+import Cards from "./Cards"
+
 
 const Veggie = () => {
   const [veggie, setVeggie] = useState([]);
-
+  
 
   useEffect(() => {
     getVeggie();
   }, []);
 
+
+
   const getVeggie = async () => {
-    const check = localStorage.getItem("veggie");
-
-    if (check) {
-      setVeggie(JSON.parse(check));
-    } else {
-      const api = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=9&tags=vegetarian`);
-      const data = await api.json();
-      
-      localStorage.setItem("veggie", JSON.stringify(data.recipes));
-      setVeggie(data.recipes);
-      // console.log(data.recipes);
+      console.log("recipe List for Vegi")
+      const content ={
+        type:'recipe',
+        tags:'categoryVegan',
+        order:'-sys.createdAt'
+       }
+      const myrcp =  await handleRecipe(content,"list")
+      console.log("recipe List for category2", myrcp)
+      setVeggie(myrcp)
     }
-  };
-
-  return (
+    
+ return (
     <div>
       <Wrapper>
         <h3>Our Vegetarian Picks</h3>
         <Splide
           options={{
-            perPage: 3,
+            perPage: 2,
             arrows: false,
             pagination: false,
             drag: "free",
             gap: "5rem",
           }}>
-          {veggie.map((recipe) => {
+            {veggie.map((recipe) => {
             return (
-              <SplideSlide key={recipe.id}>
-                <Card>
-                  <Link to={"/recipe/" + recipe.id}>
-                    <p>{recipe.title}</p>
-                    <img src={recipe.image} alt={recipe.title} />
-                    <Gradient />
-                  </Link>
-                </Card>
+              <SplideSlide key={recipe.sys.id}>
+                <Cards recipe={recipe} />
               </SplideSlide>
             );
           })}
@@ -89,7 +86,7 @@ const Card = styled.div`
     width: 100%;
     text-align: center;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.2rem;
     height: 40%;
     display: flex;
     justify-content: center;
@@ -104,6 +101,5 @@ const Gradient = styled.div`
   height: 100%;
   background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
 `;
-
 
   export default Veggie
