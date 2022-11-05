@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Category from "./components/Category";
 import Search from "./components/Search";
 import styled from "styled-components";
