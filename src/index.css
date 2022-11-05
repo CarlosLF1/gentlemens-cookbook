@@ -29,6 +29,10 @@ a {
   color: rgb(56, 56, 56);
 }
 
+p {
+  color: black;
+}
+
 #footer-logo {
   font-family: 'Lobster Two', 'Montserrat';
 }

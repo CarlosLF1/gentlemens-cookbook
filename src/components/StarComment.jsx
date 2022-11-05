@@ -34,6 +34,8 @@ export default function StarComment ({recipe, cb}) {
     {
       setComment (element.comment)
       setStars (element.star)
+
+    //  setCommented(true)
     }
   });
  },[recipe])
