@@ -14,7 +14,10 @@ function NavBar() {
             <GiKnifeFork />
             <Logo to={"/"}>The Gentlemen's Cookbook</Logo>
             </div>
-          <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
+            <div className='flex flex-row'>
+              <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
+              <Link to={"/profile"} style={{textDecoration: 'none'}}><Button>Profile</Button></Link>
+            </div>
       </Nav>
         <Search />
         <Category />
