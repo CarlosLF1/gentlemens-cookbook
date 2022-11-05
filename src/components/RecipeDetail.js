@@ -47,24 +47,26 @@ export  default function RecipeDetail() {
             <h2 className='flex flex-col items-center font-bold rounded '>{content.fields.title}</h2>
             <h5 className='flex flex-col items-center'> {content.sys.createdAt.substring(0, 10)} by {content.fields.userId}</h5>
           </div>
-          <div className='grid grid-cols-2'>
+          <div className='grid'>
              <Card ref={inputElement}>
                <img src={content?.fields?.photos[0]?.fields.file.url} alt={content.title} />
                <Gradient />
              </Card>
-             <Card className='bg-[#c1121F] bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
-               <RecipeVideo recipe={content} />
-             </Card>
+             
           </div>
-        <p>{content?.fields?.title}</p>
-        <Instructions recipe={content} />
+         
+        {/* <p>{content?.fields?.title}</p> */}
+        <div className='grid grid-cols-2'> 
+          <Card className='bg-black text-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
+              <Instructions recipe={content} />
+          </Card>
         
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
           <Ingredients recipe={content} />
         </Card>
 
-        <p>{content?.fields?.howToCook}</p>
-
+        {/* <p className='text-black'>{content?.fields?.howToCook}</p> */}
+        </div>
         <Card className='bg-black bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg'>
             <StarComment recipe={content} all={true} cb={updateComments} />
         </Card>
