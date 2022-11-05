@@ -8,23 +8,36 @@ import { createRecipe } from '../utils/createRecipeFunc';
 const fields = recipeFields;
 const fieldsState = {};
 
-fields.forEach((field) => fieldsState[field.id] = '');
+fields.forEach((field) => {
+  if(field.id !== "numberOfRatings" && field.id !== "averageOfRatings") {
+    fieldsState[field.id] = '' 
+  }
+});
 
 const RecipeCreator = () => {
-  const [recipeState, setRecipeState] = useState(fieldsState);
+  const [recipeState, setRecipeState] = useState({
+    title: '',
+    videoUrl: '',
+    ingredients: '',
+    recipeInstructions: '',
+    userId: '',
+  });
   const navigate = useNavigate();
   console.log('recipe State', recipeState);
 
-  const handleChange = (e) => setRecipeState({ ...recipeState, [e.target.id]: e.target.value });
-
+  const handleChange = (e) => {
+    setRecipeState({ ...recipeState, [e.target.id]: e.target.value })
+  } ;
+    
   // handle Signup API Integration here
   const createRecipeTotal = async () => {
-    await createRecipe(recipeState.title, recipeState.videoUrl, recipeState.ingredients, recipeState.recipeInstructions, recipeState.numberOfRatings, recipeState.averageOfRatings, recipeState.userId);
+    await createRecipe(recipeState.title, recipeState.ingredients, recipeState.recipeInstructions, recipeState.numberOfRatings, recipeState.averageOfRatings, recipeState.userId);
     navigate("/")
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(recipeState);
+    console.log("Type of Number", typeof recipeState.numberOfRatings)
     createRecipeTotal();
   };
 

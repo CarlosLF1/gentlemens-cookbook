@@ -9,7 +9,7 @@ const client = contentful.createClient({
 // react-uuid package for ID
 export const generateID = () => expandN(/^[a-zA-Z0-9-_.]{1,64}$/, 1)[0];
 
-export const createRecipe = async (id, title, videoUrl, ingredients, recipeInstructions, numberOfRatings, averageOfRatings, userId) => {
+export const createRecipe = async (id, title, ingredients, recipeInstructions, userId) => {
   await client.getSpace(`${process.env.REACT_APP_SPACE_ID}`)
     .then((space) => space.getEnvironment(`${process.env.REACT_APP_ENVIRONMENT_ID}`))
     .then((environment) => environment.createEntryWithId(
@@ -20,20 +20,11 @@ export const createRecipe = async (id, title, videoUrl, ingredients, recipeInstr
           title: {
             'en-US': `${title}`,
           },
-          youTube: {
-            'en-US': `${videoUrl}`,
-          },
           ingredients: {
-            'en-US': `${ingredients}`,
+            'en-US': [ingredients],
           },
           recipeInstructions: {
             'en-US': `${recipeInstructions}`,
-          },
-          numberofratings: {
-            'en-US': numberOfRatings,
-          },
-          avarageOfRatings: {
-            'en-US': averageOfRatings,
           },
           userId: {
             'en-US': `${userId}`,
@@ -41,7 +32,7 @@ export const createRecipe = async (id, title, videoUrl, ingredients, recipeInstr
         },
       },
     ))
-    .then((entry) => entry.publish())
+    // .then((entry) => entry.publish())
     .then((entry) => console.log(entry))
     .catch(console.error);
 };
